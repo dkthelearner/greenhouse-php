@@ -1,7 +1,7 @@
 <?php
 
 namespace Krdinesh\Greenhouse\GreenhousePhp\Clients;
-use GuzzleHttp\Client;
+use GuzzleHttp\client;
 use GuzzleHttp\Exception\RequestException;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\ServiceClientRespository;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\Exceptions\GreenhouseClientException;
@@ -19,8 +19,8 @@ class GuzzleClient implements ServiceClientRespository {
    * @param Array  $options
    * @return void
    */
-   public function __constructor($options){
-     $this->client = new Client($options);
+   public function __construct($options){
+     $this->client = new client($options);
    }
     /**
      * Get the response from the URL and return the JSON response from the Greenhouse server.
@@ -78,7 +78,7 @@ class GuzzleClient implements ServiceClientRespository {
                 'filename' => $value->getPostFilename()
              ];
          }elseif(is_array($value)){
-            foreach($value as $k => $v) { $guzzleParams[]=['name' => $k, 'contents' => $v];}
+            foreach($value as $k => $v) { $guzzleParams[]=['name' => $key .'[]','contents' => $v];}
          }else{
             $guzzleParams[] = ['name' => $key, 'contents' => $value];
          }
@@ -107,7 +107,7 @@ class GuzzleClient implements ServiceClientRespository {
     }
 
     /**
-     * Return Client function
+     * Return client function
      *
      * @return $client
      */

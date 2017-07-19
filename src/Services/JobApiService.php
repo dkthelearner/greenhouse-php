@@ -35,7 +35,6 @@ class JobApiService extends Service {
     public function getOffice($id){
         return $this->client->get("office?id=$id");
     }
-    
     /**
      * GET $baseUrl/departments
      *
@@ -89,8 +88,7 @@ class JobApiService extends Service {
      * @return  string      JSON response string from Greenhouse API.
      * @throws  GreenhouseResponseException for non-200 responses
      */
-    public function getJob($id, $questions=false)
-    {
+    public function getJob($id, $questions=false){
         $queryString = $this->getQuestionsQuery("job?id=$id", $questions);
         return $this->client->get($queryString);
     }
@@ -102,8 +100,7 @@ class JobApiService extends Service {
      * @param   boolean $showConent     If true, appends ?content=true to $uriString
      * @return  string
      */
-    public function getContentQuery($uriString, $showContent=false)
-    {
+    public function getContentQuery($uriString, $showContent=false){
         $queryString = $showContent ? '?content=true' : '';
         return $uriString . $queryString;
     }
@@ -111,8 +108,7 @@ class JobApiService extends Service {
     /**
      * Shortcut method appends questions=true to the query string for a single
      */
-    public function getQuestionsQuery($uriString, $showQuestions=false)
-    {
+    public function getQuestionsQuery($uriString, $showQuestions=false){
         $queryString = $showQuestions ? '&questions=true' : '';
         return $uriString . $queryString;
     }

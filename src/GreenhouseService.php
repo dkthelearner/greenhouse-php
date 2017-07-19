@@ -21,7 +21,9 @@ class GreenhouseService {
     public function getJobApiService(){
         $jobService = new JobApiService($this->boardToken);
         $client = new GuzzleClient([
-            ['base_uri' => Service::jobBoardBaseUrl($boardToken)]
+            [
+                'base_uri' => Service::jobBoardBaseUrl($this->boardToken)
+            ]
         ]);
         $jobService->setClient($client);
         return $jobService;

@@ -13,17 +13,23 @@ class IngestionApiService extends Service {
         $client = new GuzzleClient(['base_uri' => self::GREENHOUSE_PARTNER_V1_URL]);
         $this->setClient($client);
         $this->apiKey = $apikey;
-        $this->authorizationHeader = $this->getAuthorizationHeader();      
+        $this->authorizationHeader = $this->getAuthorizationHeader($this->apiKey);      
     }
    /**
      * GET $baseUrl/jobs
      * @param   boolean     $content    Append the content paramenter to get the job post content, department, and office.
      * @return  string      JSON response string from Greenhouse API.
-     * @throws  GreenhouseAPIResponseException for non-200 responses
+     * @throws  GreenhouseResponseException for non-200 responses
      */
     public function getJobs(){
-        return $this->apiClient->send('GET','jobs',[
-                'headers' => ['Authorization' => $this->_authorizationHeader],
+        return $this->client->send('GET','jobs',[
+                'headers' => ['Authorization' => $this->authorizationHeader],
+        ]);
+    }
+
+    public function getCandidates(){
+        return $this->client->send('GET','candidats',[
+                'headers' => ['Authorization' => $this->authorizationHeader],
         ]);
     }
 }

@@ -14,7 +14,6 @@ class GreenhouseService {
     private $boardToken;
     
     public function __construct($options=array()){
-        var_dump(isset($options['boardToken']));
         $this->apiKey      = isset($options['apiKey'])     ? $options['apiKey']     : null;
         $this->boardToken  = isset($options['boardToken']) ? $options['boardToken'] : null;
     }

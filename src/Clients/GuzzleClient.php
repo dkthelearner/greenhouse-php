@@ -20,7 +20,7 @@ class GuzzleClient implements ServiceClientRespository {
    * @return void
    */
    public function __constructor($options){
-     $this->client=new Client($options);
+     $this->client = new Client($options);
    }
     /**
      * Get the response from the URL and return the JSON response from the Greenhouse server.
@@ -32,7 +32,7 @@ class GuzzleClient implements ServiceClientRespository {
     public function get($url="") {
 
       try{
-        $guzzleResponse= $this->client->request('GET',$url);
+        $guzzleResponse = $this->client->request('GET',$url);
       }catch(RequestException $e){
         throw new GreenhouseResponseException($e->getMessage(), 0, $e);
       }

@@ -2,7 +2,7 @@
 
 namespace Krdinesh\Greenhouse\GreenhousePhp\Clients;
 
-use GuzzleHttp\client;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\ServiceClientRespository;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\Exceptions\GreenhouseClientException;
@@ -10,7 +10,7 @@ use Krdinesh\Greenhouse\GreenhousePhp\Clients\Exceptions\GreenhouseResponseExcep
 /**
  * GuzzleClient class implements the Service client Repository
  */
-class GuzzleClient implements ServiceClientRespository {
+class GuzzleClient implements ClientInterface {
 
    private $client;
 

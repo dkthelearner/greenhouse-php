@@ -5,7 +5,7 @@ namespace Krdinesh\Greenhouse\GreenhousePhp\Clients;
 /**
  * Guzzle Wrapper Interface
  */
-interface ServiceClientRespository {
+interface ClientInterface {
 
     /**
      * Get the response from the URL and return the JSON response from the Greenhouse server.

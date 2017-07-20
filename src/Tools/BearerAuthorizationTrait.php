@@ -7,10 +7,9 @@ trait BearerAuthorizationTrait
     /**
      * Returns authorization headers for the 'bearer' grant.
      * @param  mixed|null $token Either a string or an access token instance
-     * @return array
+     * @return Array
      */
-    protected function getAuthorizationHeader($token = null)
-    {
-        return 'Bearer ' . $token;
+    protected function getAuthorizationHeader($apiKey = null){
+        return  ['Authorization' => 'Bearer '. $apiKey];
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Krdinesh\Greenhouse\GreenhousePhp\Clients;
+
 use GuzzleHttp\client;
 use GuzzleHttp\Exception\RequestException;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\ServiceClientRespository;
@@ -54,11 +55,7 @@ class GuzzleClient implements ServiceClientRespository {
       try{
         $guzzleResponse=$this->client
           ->post('POST',
-           $url,
-          [
-            'multipart'=>$postParams,
-            'header'=>$headers
-          ]);
+           $url,[ 'multipart'=>$postParams,'header'=>$headers]);
         }catch(RequestException $e){
           throw new GreenhouseResponseException($e->getMessage(), 0, $e);
         }

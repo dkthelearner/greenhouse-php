@@ -21,10 +21,8 @@ class GreenhouseService {
     public function getJobApiService(){
         $jobService = new JobApiService($this->boardToken);
         $client = new GuzzleClient([
-            [
                 'base_uri' => Service::jobBoardBaseUrl($this->boardToken)
-            ]
-        ]);
+            ]);
         $jobService->setClient($client);
         return $jobService;
     }
@@ -32,8 +30,8 @@ class GreenhouseService {
     public function getIngestionService(){
         $ingestionService = new IngestionApiService($this->apiKey);
         $client = new GuzzleClient([
-            ['base_uri' => Service::ingestionApiBaseUrl()]
-        ]);
+                'base_uri' => Service::ingestionApiBaseUrl()
+            ]);
         $ingestionService->setClient($client);
         return $ingestionService;
     }

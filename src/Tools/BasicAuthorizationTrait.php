@@ -5,12 +5,11 @@ namespace Krdinesh\Greenhouse\GreenhousePhp\Tools;
 trait BasicAuthorizationTrait
 {
     /**
-     * Returns authorization headers for the 'bearer' grant.
+     * Returns authorization headers for the 'Basic' grant.
      * @param  mixed|null $token Either a string or an access token instance
-     * @return array
+     * @return Array
      */
-    protected function getAuthorizationHeader($token = null)
-    {
-        return 'Basic ' . $token;
+    protected function getAuthorizationHeader($apiKey = null){
+        return  ['Authorization' => 'Basic '. $apiKey];
     }
 }

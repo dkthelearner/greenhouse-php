@@ -32,23 +32,23 @@ class GreehouseServiceTest extends \PHPUnit_Framework_TestCase {
             $service
         );
     }
-    public function testJobApiService(){
-        $jobService=$this->greenhouseService->getJobApiService();
+    public function testJobService(){
+        $jobService=$this->greenhouseService->getJobService();
         $this->assertInstanceOf('\Krdinesh\Greenhouse\GreenhousePhp\Clients\GuzzleClient', $jobService->getClient()); 
-        $this->assertInstanceOf('\Krdinesh\Greenhouse\GreenhousePhp\Services\JobApiService', $jobService);     
+        $this->assertInstanceOf('\Krdinesh\Greenhouse\GreenhousePhp\Services\JobService', $jobService);     
         $this->assertEquals(
             'https://api.greenhouse.io/v1/boards/test_token/embed/',
-            $jobService->getJobBoardBaseUrl()
+            $jobService->getjobBoardBaseUrl()
         );
     }
 
     public function testIngestionService(){
         $ingestionService=$this->greenhouseService->getIngestionService();
         $this->assertInstanceOf('\Krdinesh\Greenhouse\GreenhousePhp\Clients\GuzzleClient', $ingestionService->getClient()); 
-        $this->assertInstanceOf('\Krdinesh\Greenhouse\GreenhousePhp\Services\IngestionApiService', $ingestionService);     
+        $this->assertInstanceOf('\Krdinesh\Greenhouse\GreenhousePhp\Services\IngestionService', $ingestionService);     
         $this->assertEquals(
             'https://api.greenhouse.io/v1/partner/',
-            $ingestionService->getIngestionApiBaseUrl()
+            $ingestionService->getIngestionBaseUrl()
         );
     }
 }

@@ -2,15 +2,15 @@
 
 namespace Krdinesh\Greenhouse\GreenhousePhp\Test\Services;
 
-use Krdinesh\Greenhouse\GreenhousePhp\Services\IngestionApiService;
+use Krdinesh\Greenhouse\GreenhousePhp\Services\IngestionService;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\Exceptions\GreenhouseResponseException;
 
 class IngestionApiServiceTest extends \PHPUnit_Framework_TestCase {
 
     public function setUp(){
-        $this->ingestionService = new IngestionApiService('apiKey');
-        $this->errorService = new IngestionApiService('exception_api_key');
-        $this->baseUrl =  IngestionApiService::ingestionApiBaseUrl();
+        $this->ingestionService = new IngestionService('apiKey');
+        $this->errorService = new IngestionService('exception_api_key');
+        $this->baseUrl =  IngestionService::ingestionBaseUrl();
     }
 
     public function testGetJobsException(){

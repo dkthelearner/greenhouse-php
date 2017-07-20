@@ -8,7 +8,7 @@ use Krdinesh\Greenhouse\GreenhousePhp\Clients\GuzzleClient;
 use Krdinesh\Greenhouse\GreenhousePhp\Tools\BasicAuthorizationTrait;
 
 
-class JobApiService extends Service {
+class JobService extends Service {
 
     public function __construct($boardToken){
         $client = new GuzzleClient(['base_uri' => self::jobBoardBaseUrl($boardToken)]);

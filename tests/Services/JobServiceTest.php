@@ -3,14 +3,14 @@
 namespace Krdinesh\Greenhouse\GreenhousePhp\Tests\Services;
 
 
-use Krdinesh\Greenhouse\GreenhousePhp\Services\JobApiService;
+use Krdinesh\Greenhouse\GreenhousePhp\Services\JobService;
 
-class JobApiServiceTest extends \PHPUnit_Framework_TestCase {
+class JobServiceTest extends \PHPUnit_Framework_TestCase {
 
     public function setUp(){
-        $this->jobService = new JobApiService('greenhouse');
-        $this->errorService = new JobApiService('test_greenhouse');
-        $this->baseUrl = JobApiService::jobBoardBaseUrl('greenhouse');
+        $this->jobService = new JobService('greenhouse');
+        $this->errorService = new JobService('test_greenhouse');
+        $this->baseUrl = JobService::jobBoardBaseUrl('greenhouse');
     }
 
     public function testGetContentQueryTrue(){

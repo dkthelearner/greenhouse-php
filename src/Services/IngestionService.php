@@ -7,12 +7,12 @@ use Krdinesh\Greenhouse\GreenhousePhp\Clients\GuzzleClient;
 use Krdinesh\Greenhouse\GreenhousePhp\Tools\BearerAuthorizationTrait;
 use Krdinesh\Greenhouse\GreenhousePhp\Tools\QueryBuilderTrait;
 
-class IngestionApiService extends Service {
+class IngestionService extends Service {
     use BearerAuthorizationTrait;
     use QueryBuilderTrait;
 
     public function __construct($apikey){
-        $client = new GuzzleClient(['base_uri' => self::GREENHOUSE_PARTNER_V1_URL]);
+        $client = new GuzzleClient(['base_uri' => self::INGESTION_V1_URL]);
         $this->setClient($client);
         $this->apiKey = $apikey;
         $this->authorizationHeader = $this->getAuthorizationHeader($this->apiKey); 

@@ -32,4 +32,10 @@ class IngestionApiService extends Service {
                 'headers' => ['Authorization' => $this->authorizationHeader],
         ]);
     }
+
+    public function postCandidates(Array $postVar){
+        return $this->client->post($this->client->formatPostParameters($postVar),[
+                'headers' => ['Authorization' => $this->authorizationHeader],
+        ],'candidates');
+    }
 }

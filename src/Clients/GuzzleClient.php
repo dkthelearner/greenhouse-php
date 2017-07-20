@@ -53,7 +53,9 @@ class GuzzleClient implements ServiceClientRespository {
     public function post(Array $postParams, Array $headers, $url=null){
       try{
         $guzzleResponse=$this->client
-          ->post('POST',$url,[
+          ->post('POST',
+           $url,
+          [
             'multipart'=>$postParams,
             'header'=>$headers
           ]);

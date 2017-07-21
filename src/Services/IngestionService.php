@@ -4,8 +4,8 @@ namespace Krdinesh\Greenhouse\GreenhousePhp\Services;
 
 use Krdinesh\Greenhouse\GreenhousePhp\Services\Service;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\GuzzleClient;
-use Krdinesh\Greenhouse\GreenhousePhp\Tools\BearerAuthorizationTrait;
 use Krdinesh\Greenhouse\GreenhousePhp\Tools\QueryBuilderTrait;
+use Krdinesh\Greenhouse\GreenhousePhp\Tools\BearerAuthorizationTrait;
 
 class IngestionService extends Service {
     use BearerAuthorizationTrait;

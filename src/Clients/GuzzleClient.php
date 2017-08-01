@@ -1,6 +1,7 @@
 <?php
 
 namespace Krdinesh\Greenhouse\GreenhousePhp\Clients;
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\ServiceClientRespository;
@@ -9,7 +10,7 @@ use Krdinesh\Greenhouse\GreenhousePhp\Clients\Exceptions\GreenhouseResponseExcep
 /**
  * GuzzleClient class implements the Service client Repository
  */
-class GuzzleClient implements ServiceClientRespository {
+class GuzzleClient implements ClientInterface {
 
    private $client;
 
@@ -19,8 +20,8 @@ class GuzzleClient implements ServiceClientRespository {
    * @param Array  $options
    * @return void
    */
-   public function __constructor($options){
-     $this->client=new Client($options);
+   public function __construct($options){
+     $this->client = new client($options);
    }
     /**
      * Get the response from the URL and return the JSON response from the Greenhouse server.
@@ -32,7 +33,7 @@ class GuzzleClient implements ServiceClientRespository {
     public function get($url="") {
 
       try{
-        $guzzleResponse= $this->client->request('GET',$url);
+        $guzzleResponse = $this->client->request('GET',$url);
       }catch(RequestException $e){
         throw new GreenhouseResponseException($e->getMessage(), 0, $e);
       }
@@ -53,10 +54,7 @@ class GuzzleClient implements ServiceClientRespository {
     public function post(Array $postParams, Array $headers, $url=null){
       try{
         $guzzleResponse=$this->client
-          ->post('POST',$url,[
-            'multipart'=>$postParams,
-            'header'=>$headers
-          ]);
+          ->post($url,[ 'multipart'=>$postParams,'header'=>$headers]);
         }catch(RequestException $e){
           throw new GreenhouseResponseException($e->getMessage(), 0, $e);
         }
@@ -78,7 +76,7 @@ class GuzzleClient implements ServiceClientRespository {
                 'filename' => $value->getPostFilename()
              ];
          }elseif(is_array($value)){
-            foreach($value as $k => $v) { $guzzleParams[]=['name' => $k, 'contents' => $v];}
+            foreach($value as $k => $v) { $guzzleParams[]=['name' => $key .'[]','contents' => $v];}
          }else{
             $guzzleParams[] = ['name' => $key, 'contents' => $value];
          }
@@ -107,7 +105,7 @@ class GuzzleClient implements ServiceClientRespository {
     }
 
     /**
-     * Return Client function
+     * Return client function
      *
      * @return $client
      */

@@ -16,10 +16,10 @@ class Service {
     protected $apiKey;       // access key  for 'ingestion' and 'job api service'
     protected $authorizationHeader;
     
-    const APPLICATION_URL = 'https://api.greenhouse.io/v1/applications/';
     const API_V1_URL = 'https://api.greenhouse.io/v1/';
+    const APPLICATION_URL = 'https://api.greenhouse.io/v1/applications/';
     const HARVEST_V1_URL = 'https://harvest.greenhouse.io/v1/';
-    const GREENHOUSE_PARTNER_V1_URL = 'https://api.greenhouse.io/v1/partner/';
+    const INGESTION_V1_URL = 'https://api.greenhouse.io/v1/partner/';
 
     public function getClient(){
         return $this->client;
@@ -33,15 +33,15 @@ class Service {
         return self::API_V1_URL . "boards/{$boardToken}/embed/";
     }
 
-    public static function ingestionApiBaseUrl(){
-        return self::GREENHOUSE_PARTNER_V1_URL;
+    public static function ingestionBaseUrl(){
+        return self::INGESTION_V1_URL;
     }
 
-    public function getIngestionApiBaseUrl(){
-        return self::GREENHOUSE_PARTNER_V1_URL;
+    public function getIngestionBaseUrl(){
+        return self::INGESTION_V1_URL;
     }
 
-    public function getJobBoardBaseUrl(){
+    public function getjobBoardBaseUrl(){
         if (empty($this->boardToken)) {
             throw new GreenhouseServiceException('A client token must be defined to get the base URL.');
         }

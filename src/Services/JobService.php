@@ -8,7 +8,7 @@ use Krdinesh\Greenhouse\GreenhousePhp\Clients\GuzzleClient;
 use Krdinesh\Greenhouse\GreenhousePhp\Tools\BasicAuthorizationTrait;
 
 
-class JobApiService extends Service {
+class JobService extends Service {
 
     public function __construct($boardToken){
         $client = new GuzzleClient(['base_uri' => self::jobBoardBaseUrl($boardToken)]);
@@ -19,10 +19,10 @@ class JobApiService extends Service {
      * GET $baseUrl/offices
      *
      * @return string   JSON response string from Greenhouse API.
-     * @throws GreenhouseAPIResponseException for non-200 responses
+     * @throws GreenhouseResponseException for non-200 responses
      */
     public function getOffices(){
-        return $this->apiClient->get('offices');
+        return $this->client->get('offices');
     }
     
     /**
@@ -30,20 +30,19 @@ class JobApiService extends Service {
      *
      * @param   $id     number      The id of the office to retrieve
      * @return  string  JSON response string from Greenhouse API.
-     * @throws  GreenhouseAPIResponseException for non-200 responses
+     * @throws  GreenhouseResponseException for non-200 responses
      */
     public function getOffice($id){
-        return $this->apiClient->get("office?id=$id");
+        return $this->client->get("office?id=$id");
     }
-    
     /**
      * GET $baseUrl/departments
      *
      * @return string   JSON response string from Greenhouse API.
-     * @throws GreenhouseAPIResponseException for non-200 responses
+     * @throws GreenhouseResponseException for non-200 responses
      */
     public function getDepartments(){
-        return $this->apiClient->get('departments');
+        return $this->client->get('departments');
     }
     
     /**
@@ -51,20 +50,20 @@ class JobApiService extends Service {
      *
      * @param   $id     number      The id of the department to retrieve
      * @return  string  JSON response string from Greenhouse API.
-     * @throws  GreenhouseAPIResponseException for non-200 responses
+     * @throws  GreenhouseResponseException for non-200 responses
      */
     public function getDepartment($id){
-        return $this->apiClient->get("department?id=$id");
+        return $this->client->get("department?id=$id");
     }
     
     /**
      * GET $baseUrl     (The Job board name and intro)
      *
      * @return  string  JSON response string from Greenhouse API.
-     * @throws  GreenhouseAPIResponseException for non-200 responses
+     * @throws  GreenhouseResponseException for non-200 responses
      */
     public function getBoard(){
-        return $this->apiClient->get();
+        return $this->client->get();
     }
     
     /**
@@ -73,11 +72,11 @@ class JobApiService extends Service {
      * @param   boolean     $content    Append the content paramenter to get the
      *                                      job post content, department, and office.
      * @return  string      JSON response string from Greenhouse API.
-     * @throws  GreenhouseAPIResponseException for non-200 responses
+     * @throws  GreenhouseResponseException for non-200 responses
      */
     public function getJobs($content=false){
         $queryString = $this->getContentQuery('jobs', $content);
-        return $this->apiClient->get($queryString);
+        return $this->client->get($queryString);
     }
     
     /**
@@ -87,12 +86,11 @@ class JobApiService extends Service {
      * @param   $question   boolean     Append the question paramenter to get the
      *                                      question info in the job response.
      * @return  string      JSON response string from Greenhouse API.
-     * @throws  GreenhouseAPIResponseException for non-200 responses
+     * @throws  GreenhouseResponseException for non-200 responses
      */
-    public function getJob($id, $questions=false)
-    {
+    public function getJob($id, $questions=false){
         $queryString = $this->getQuestionsQuery("job?id=$id", $questions);
-        return $this->apiClient->get($queryString);
+        return $this->client->get($queryString);
     }
     /**
      * Method appends the content parameter to the URL if content is true, returns
@@ -102,8 +100,7 @@ class JobApiService extends Service {
      * @param   boolean $showConent     If true, appends ?content=true to $uriString
      * @return  string
      */
-    public function getContentQuery($uriString, $showContent=false)
-    {
+    public function getContentQuery($uriString, $showContent=false){
         $queryString = $showContent ? '?content=true' : '';
         return $uriString . $queryString;
     }
@@ -111,8 +108,7 @@ class JobApiService extends Service {
     /**
      * Shortcut method appends questions=true to the query string for a single
      */
-    public function getQuestionsQuery($uriString, $showQuestions=false)
-    {
+    public function getQuestionsQuery($uriString, $showQuestions=false){
         $queryString = $showQuestions ? '&questions=true' : '';
         return $uriString . $queryString;
     }

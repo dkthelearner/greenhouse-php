@@ -2,8 +2,8 @@
 
 namespace Krdinesh\Greenhouse\GreenhousePhp\Test\Services;
 
-use Krdinesh\Greenhouse\GreenhousePhp\Services\JobApiService;
-use Krdinesh\Greenhouse\GreenhousePhp\Services\IngestionApiService;
+use Krdinesh\Greenhouse\GreenhousePhp\Services\JobService;
+use Krdinesh\Greenhouse\GreenhousePhp\Services\IngestionService;
 use Krdinesh\Greenhouse\GreenhousePhp\Services\Service;
 
 class ServiceTest extends \PHPUnit_Framework_TestCase {
@@ -12,26 +12,26 @@ class ServiceTest extends \PHPUnit_Framework_TestCase {
         $this->apiService = new Service();
     }
 
-    public function testJobBoardBaseUrl(){
+    public function testjobBoardBaseUrl(){
         $excepted = "https://api.greenhouse.io/v1/boards/test_token/embed/";
         $this->assertEquals($excepted,Service::jobBoardBaseUrl('test_token'));
     }
 
     public function testingestionApiBaseUrl(){
         $excepted = "https://api.greenhouse.io/v1/partner/";
-        $this->assertEquals($excepted,Service::GREENHOUSE_PARTNER_V1_URL);
+        $this->assertEquals($excepted,Service::INGESTION_V1_URL);
     }
 
-    public function testGetIngestionApiBaseUrl(){
-        $ingestionService= new IngestionApiService('apikey');
+    public function testgetIngestionBaseUrl(){
+        $ingestionService= new IngestionService('apikey');
         $excepted = "https://api.greenhouse.io/v1/partner/";
-        $this->assertEquals($excepted,$this->apiService->getIngestionApiBaseUrl());
+        $this->assertEquals($excepted,$this->apiService->getIngestionBaseUrl());
     }
 
-    public function testGetJobBoardBaseUrl(){
-        $jobService=new JobApiService('test_token');
+    public function testGetjobBoardBaseUrl(){
+        $jobService=new JobService('test_token');
         $excepted = "https://api.greenhouse.io/v1/boards/test_token/embed/";
-        $this->assertEquals($excepted,$jobService->getJobBoardBaseUrl());
+        $this->assertEquals($excepted,$jobService->getjobBoardBaseUrl());
     }
 
     

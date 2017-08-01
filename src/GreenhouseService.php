@@ -4,8 +4,8 @@ namespace Krdinesh\Greenhouse\GreenhousePhp;
 
 use Krdinesh\Greenhouse\GreenhousePhp\Services\Service;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\GuzzleClient;
-use Krdinesh\Greenhouse\GreenhousePhp\Services\JobApiService;
-use Krdinesh\Greenhouse\GreenhousePhp\Services\IngestionApiService;
+use Krdinesh\Greenhouse\GreenhousePhp\Services\JobService;
+use Krdinesh\Greenhouse\GreenhousePhp\Services\IngestionService;
 
 
 class GreenhouseService {
@@ -14,25 +14,24 @@ class GreenhouseService {
     private $boardToken;
     
     public function __construct($options=array()){
-        var_dump(isset($options['boardToken']));
         $this->apiKey      = isset($options['apiKey'])     ? $options['apiKey']     : null;
         $this->boardToken  = isset($options['boardToken']) ? $options['boardToken'] : null;
     }
     
-    public function getJobApiService(){
-        $jobService = new JobApiService($this->boardToken);
+    public function getJobService(){
+        $jobService = new JobService($this->boardToken);
         $client = new GuzzleClient([
-            ['base_uri' => Service::jobBoardBaseUrl($boardToken)]
-        ]);
+                'base_uri' => Service::jobBoardBaseUrl($this->boardToken)
+            ]);
         $jobService->setClient($client);
         return $jobService;
     }
     
     public function getIngestionService(){
-        $ingestionService = new IngestionApiService($this->apiKey);
+        $ingestionService = new IngestionService($this->apiKey);
         $client = new GuzzleClient([
-            ['base_uri' => Service::ingestionApiBaseUrl()]
-        ]);
+                'base_uri' => Service::ingestionBaseUrl()
+            ]);
         $ingestionService->setClient($client);
         return $ingestionService;
     }

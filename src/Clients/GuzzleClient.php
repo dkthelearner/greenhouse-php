@@ -54,8 +54,7 @@ class GuzzleClient implements ClientInterface {
     public function post(Array $postParams, Array $headers, $url=null){
       try{
         $guzzleResponse=$this->client
-          ->post('POST',
-           $url,[ 'multipart'=>$postParams,'header'=>$headers]);
+          ->post($url,[ 'multipart'=>$postParams,'header'=>$headers]);
         }catch(RequestException $e){
           throw new GreenhouseResponseException($e->getMessage(), 0, $e);
         }

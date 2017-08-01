@@ -38,8 +38,6 @@ class IngestionService extends Service {
     }
 
     public function postCandidates(Array $postVar){
-        return $this->client->post($this->client->formatPostParameters($postVar),[
-                'headers' => $this->authorizationHeader
-        ],'candidates');
+        return $this->client->post($this->client->formatPostParameters($postVar), $this->authorizationHeader,'candidates');
     }
 }

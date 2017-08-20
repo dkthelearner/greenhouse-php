@@ -32,10 +32,6 @@ class ServiceTest extends \PHPUnit_Framework_TestCase {
         $jobService=new JobService('test_token');
         $excepted = "https://api.greenhouse.io/v1/boards/test_token/embed/";
         $this->assertEquals($excepted,$jobService->getjobBoardBaseUrl());
-    }
-
-    
-    
-       
+    }     
 }
 

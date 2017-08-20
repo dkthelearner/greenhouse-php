@@ -5,8 +5,6 @@ namespace Krdinesh\Greenhouse\GreenhousePhp\Services;
 
 use Krdinesh\Greenhouse\GreenhousePhp\Services\Service;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\GuzzleClient;
-use Krdinesh\Greenhouse\GreenhousePhp\Tools\BasicAuthorizationTrait;
-
 
 class JobService extends Service {
 

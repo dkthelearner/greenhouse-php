@@ -15,7 +15,7 @@ class GuzzleClient implements ClientInterface {
    private $client;
 
   /**
-   * Contructor Function function
+   * Constructor Function function
    *
    * @param Array  $options
    * @return void

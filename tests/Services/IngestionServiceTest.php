@@ -3,7 +3,6 @@
 namespace Krdinesh\Greenhouse\GreenhousePhp\Test\Services;
 
 use Krdinesh\Greenhouse\GreenhousePhp\Services\IngestionService;
-use Krdinesh\Greenhouse\GreenhousePhp\Clients\Exceptions\GreenhouseResponseException;
 
 class IngestionApiServiceTest extends \PHPUnit_Framework_TestCase {
 

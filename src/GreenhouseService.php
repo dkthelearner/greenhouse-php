@@ -6,7 +6,8 @@ use Krdinesh\Greenhouse\GreenhousePhp\Services\Service;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\GuzzleClient;
 use Krdinesh\Greenhouse\GreenhousePhp\Services\JobService;
 use Krdinesh\Greenhouse\GreenhousePhp\Services\IngestionService;
-
+use Krdinesh\Greenhouse\GreenhousePhp\Services\HarvestService;
+use Krdinesh\Greenhouse\GreenhousePhp\Services\JobBoardService;
 
 class GreenhouseService {
 
@@ -34,5 +35,13 @@ class GreenhouseService {
             ]);
         $ingestionService->setClient($client);
         return $ingestionService;
+    }
+
+    public function getJobBoardService(){
+        return new JobBoardService($this->_boardToken);
+    }
+    
+    public function getHarvestService(){
+        return new HarvestService($this->apiKey);
     }
 }

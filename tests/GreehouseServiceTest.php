@@ -3,7 +3,6 @@
 
 namespace Krdinesh\Greenhouse\GreenhousePhp\Tests;
 
-use Krdinesh\Greenhouse\GreenhousePhp\Services\Service;
 use Krdinesh\Greenhouse\GreenhousePhp\GreenhouseService;
 
 class GreehouseServiceTest extends \PHPUnit_Framework_TestCase {
@@ -50,5 +49,15 @@ class GreehouseServiceTest extends \PHPUnit_Framework_TestCase {
             'https://api.greenhouse.io/v1/partner/',
             $ingestionService->getIngestionBaseUrl()
         );
+    }
+
+    public function testGetHarvestService(){
+        $service = $this->greenhouseService->getHarvestService();
+        $this->assertInstanceOf(
+            '\Krdinesh\Greenhouse\GreenhousePhp\Services\HarvestService',
+            $service
+        );
+        $authHeader = 'Basic ' . base64_encode($this->apiKey . ':');
+        $this->assertEquals($authHeader, $service->getAuthorizationHeader());
     }
 }

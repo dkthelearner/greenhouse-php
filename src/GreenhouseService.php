@@ -28,11 +28,11 @@ class GreenhouseService {
         return $jobService;
     }
     
-    public function getIngestionService(){
-        $ingestionService = new IngestionService($this->apiKey);
-        $client = new GuzzleClient([
-                'base_uri' => Service::ingestionBaseUrl()
-            ]);
+   public function getIngestionService($isBasicAuth = false) {
+        $ingestionService = new IngestionService($this->apiKey, $isBasicAuth);
+        $client           = new GuzzleClient([
+            'base_uri' => Service::ingestionBaseUrl()
+        ]);
         $ingestionService->setClient($client);
         return $ingestionService;
     }

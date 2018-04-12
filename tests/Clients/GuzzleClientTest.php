@@ -3,13 +3,15 @@ namespace Krdinesh\Greenhouse\GreenhousePhp\Tests\Clients;
 
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\GuzzleClient;
 
-class GuzzleClientTest extends \PHPUnit_Framework_TestCase {
-
-    public function setUp(){
+class GuzzleClientTest extends \PHPUnit_Framework_TestCase
+{
+    public function setUp()
+    {
         $this->client= new GuzzleClient(['base_uri'=>"htttp://www.credibll.dev"]);
     }
 
-    public function testGuzzleInitialization(){
+    public function testGuzzleInitialization()
+    {
         $client= new GuzzleClient(
             ['base_uri'=>"htttp://www.credibll.com"]
         );
@@ -20,7 +22,8 @@ class GuzzleClientTest extends \PHPUnit_Framework_TestCase {
         $this->assertInstanceOf('\GuzzleHttp\Client', $client->getClient());
     }
 
-    public function testGetException(){
+    public function testGetException()
+    {
         $errorUrl = 'https://api.greenhouse.io/v1/boards/exception_co/embed/';
         $client= new GuzzleClient(
             ['base_uri'=>$errorUrl]
@@ -29,7 +32,8 @@ class GuzzleClientTest extends \PHPUnit_Framework_TestCase {
         $client->get('jobs');
     }
 
-    public function testFormatPostParametersWithoutFiles(){
+    public function testFormatPostParametersWithoutFiles()
+    {
         $postVar=[
             "firstname"=>"Dinesh",
             "lastname"=>"Kumar",
@@ -46,6 +50,6 @@ class GuzzleClientTest extends \PHPUnit_Framework_TestCase {
             ["name"=>"talent[]", "contents"=>"stuff4"]
         ];
 
-        $this->assertEquals($excepted , $this->client->formatPostParameters($postVar));
+        $this->assertEquals($excepted, $this->client->formatPostParameters($postVar));
     }
 }

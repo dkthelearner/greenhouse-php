@@ -4,9 +4,10 @@ namespace Krdinesh\Greenhouse\GreenhousePhp\Test\Services;
 
 use Krdinesh\Greenhouse\GreenhousePhp\Services\HarvestService;
 
-class HarvestServiceTest extends \PHPUnit_Framework_TestCase {
-
-    public function setUp() {
+class HarvestServiceTest extends \PHPUnit_Framework_TestCase
+{
+    public function setUp()
+    {
         $this->harvestService = new HarvestService('greenhouse');
         $apiStub              = $this->getMockBuilder('\Greenhouse\GreenhousePhp\Client\GuzzleClient')
                 ->setMethods(array('send'))
@@ -15,7 +16,8 @@ class HarvestServiceTest extends \PHPUnit_Framework_TestCase {
         $this->expectedAuth   = 'Basic Z3JlZW5ob3VzZTo=';
     }
 
-    public function testGetJobPosts() {
+    public function testGetJobPosts()
+    {
         $expected = array(
             'method'     => 'get',
             'url'        => 'job_posts',
@@ -29,7 +31,8 @@ class HarvestServiceTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($this->expectedAuth, $this->harvestService->getAuthorizationHeader());
     }
 
-    public function testGetJobPostsPaging() {
+    public function testGetJobPostsPaging()
+    {
         $params   = array('page' => 2, 'per_page' => 100);
         $expected = array(
             'method'     => 'get',
@@ -44,7 +47,8 @@ class HarvestServiceTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($this->expectedAuth, $this->harvestService->getAuthorizationHeader());
     }
 
-    public function testGetJobPostsForJob() {
+    public function testGetJobPostsForJob()
+    {
         $expected = array(
             'method'     => 'get',
             'url'        => 'jobs/12345/job_post',
@@ -58,7 +62,8 @@ class HarvestServiceTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($this->expectedAuth, $this->harvestService->getAuthorizationHeader());
     }
 
-    public function testGetJobStagesForJob() {
+    public function testGetJobStagesForJob()
+    {
         $expected = array(
             'method'     => 'get',
             'url'        => 'jobs/12345/stages',
@@ -72,7 +77,8 @@ class HarvestServiceTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($this->expectedAuth, $this->harvestService->getAuthorizationHeader());
     }
 
-    public function testGetJobsNoPaging() {
+    public function testGetJobsNoPaging()
+    {
         $expected = array(
             'method'     => 'get',
             'url'        => 'jobs',
@@ -87,7 +93,8 @@ class HarvestServiceTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($this->expectedAuth, $this->harvestService->getAuthorizationHeader());
     }
 
-    public function testGetJobsPaging() {
+    public function testGetJobsPaging()
+    {
         $params   = array('page' => 2, 'per_page' => 100);
         $expected = array(
             'method'     => 'get',
@@ -102,7 +109,8 @@ class HarvestServiceTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($this->expectedAuth, $this->harvestService->getAuthorizationHeader());
     }
 
-    public function testGetJob() {
+    public function testGetJob()
+    {
         $expected = array(
             'method'     => 'get',
             'url'        => 'jobs/12345',
@@ -115,5 +123,4 @@ class HarvestServiceTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $this->harvestService->getHarvest());
         $this->assertEquals($this->expectedAuth, $this->harvestService->getAuthorizationHeader());
     }
-
 }

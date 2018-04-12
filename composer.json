@@ -2,12 +2,10 @@
     "name": "krdinesh/greenhouse-php",
     "description": "Greenhouse PHP",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "krdinesh",
-            "email": "kumardinesh0521@gmail.com"
-        }
-    ],
+    "authors": [{
+        "name": "krdinesh",
+        "email": "kumardinesh0521@gmail.com"
+    }],
     "require": {
         "php": ">=5.5.9",
         "guzzlehttp/guzzle": "^6.1"
@@ -16,13 +14,13 @@
         "phpunit/phpunit": "~5.0"
     },
     "autoload": {
-        "psr-4": { 
-            "Krdinesh\\Greenhouse\\GreenhousePhp\\": "src/" 
+        "psr-4": {
+            "Krdinesh\\Greenhouse\\GreenhousePhp\\": "src/"
         }
     },
     "autoload-dev": {
-        "psr-4": { 
-            "Krdinesh\\Greenhouse\\GreenhousePhp\\Tests\\": "tests/" 
+        "psr-4": {
+            "Krdinesh\\Greenhouse\\GreenhousePhp\\Tests\\": "tests/"
         }
     }
 }

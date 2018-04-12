@@ -6,15 +6,16 @@ use Krdinesh\Greenhouse\GreenhousePhp\Services\Service;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\GuzzleClient;
 use Krdinesh\Greenhouse\GreenhousePhp\Tools\QueryBuilderTrait;
 
-class IngestionService extends Service {
-
+class IngestionService extends Service
+{
     use QueryBuilderTrait;
 
-    public function __construct($apikey, $isBasicHeader = false) {
+    public function __construct($apikey, $isBasicHeader = false)
+    {
         $client       = new GuzzleClient(['base_uri' => self::INGESTION_V1_URL]);
         $this->setClient($client);
         $this->apiKey = $apikey;
-        if($isBasicHeader) {
+        if ($isBasicHeader) {
             $this->authorizationHeader = $this->getAuthorizationHeader($this->apiKey);
         } else {
             $this->authorizationHeader = $this->getBearerAuthorizationHeader($this->apiKey);
@@ -27,21 +28,23 @@ class IngestionService extends Service {
      * @return  string      JSON response string from Greenhouse API.
      * @throws  GreenhouseResponseException for non-200 responses
      */
-    public function getJobs() {
+    public function getJobs()
+    {
         return $this->client->send('GET', 'jobs', [
                     'headers' => $this->authorizationHeader
         ]);
     }
 
-    public function getCandidates($ids) {
+    public function getCandidates($ids)
+    {
         $url = $ids ? 'candidates' : 'candidates?' . $this->buildQueryString();
         return $this->client->send('GET', $url, [
                     'headers' => $this->authorizationHeader
         ]);
     }
 
-    public function postCandidates(Array $postVar) {
+    public function postCandidates(array $postVar)
+    {
         return $this->client->post($this->client->formatPostParameters($postVar), $this->authorizationHeader, 'candidates');
     }
-
 }

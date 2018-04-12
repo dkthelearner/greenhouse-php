@@ -9,17 +9,19 @@ use Krdinesh\Greenhouse\GreenhousePhp\Services\IngestionService;
 use Krdinesh\Greenhouse\GreenhousePhp\Services\HarvestService;
 use Krdinesh\Greenhouse\GreenhousePhp\Services\JobBoardService;
 
-class GreenhouseService {
-
+class GreenhouseService
+{
     private $apiKey;
     private $boardToken;
     
-    public function __construct($options=array()){
+    public function __construct($options=array())
+    {
         $this->apiKey      = isset($options['apiKey'])     ? $options['apiKey']     : null;
         $this->boardToken  = isset($options['boardToken']) ? $options['boardToken'] : null;
     }
     
-    public function getJobService(){
+    public function getJobService()
+    {
         $jobService = new JobService($this->boardToken);
         $client = new GuzzleClient([
                 'base_uri' => Service::jobBoardBaseUrl($this->boardToken)
@@ -28,7 +30,8 @@ class GreenhouseService {
         return $jobService;
     }
     
-   public function getIngestionService($isBasicAuth = false) {
+    public function getIngestionService($isBasicAuth = false)
+    {
         $ingestionService = new IngestionService($this->apiKey, $isBasicAuth);
         $client           = new GuzzleClient([
             'base_uri' => Service::ingestionBaseUrl()
@@ -37,11 +40,13 @@ class GreenhouseService {
         return $ingestionService;
     }
 
-    public function getJobBoardService(){
+    public function getJobBoardService()
+    {
         return new JobBoardService($this->_boardToken);
     }
     
-    public function getHarvestService(){
+    public function getHarvestService()
+    {
         return new HarvestService($this->apiKey);
     }
 }

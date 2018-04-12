@@ -5,7 +5,8 @@ namespace Krdinesh\Greenhouse\GreenhousePhp\Clients;
 /**
  * Guzzle Wrapper Interface
  */
-interface ClientInterface {
+interface ClientInterface
+{
 
     /**
      * Get the response from the URL and return the JSON response from the Greenhouse server.
@@ -19,14 +20,14 @@ interface ClientInterface {
      * @param string $url
      * @throws  GreenhouseServiceResponseException  for non-200 responses
      */
-    public function post(Array $postParams, Array $header, $url);
+    public function post(array $postParams, array $header, $url);
 
-   /**
-     * Transform the post parameters that client understands.
-     * @params  Array   $postParamters      
-     * @return  mixed   
-     */
-    public function formatPostParameters(Array $postParameters);
+    /**
+      * Transform the post parameters that client understands.
+      * @params  Array   $postParamters
+      * @return  mixed
+      */
+    public function formatPostParameters(array $postParameters);
 
     /**
      * Send Request
@@ -35,5 +36,5 @@ interface ClientInterface {
      * @param [type] $url
      * @return void
      */
-    public function send($method,$url,Array $options);
+    public function send($method, $url, array $options);
 }

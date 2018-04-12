@@ -8,10 +8,10 @@ use Krdinesh\Greenhouse\GreenhousePhp\Services\Exception\GreenhouseServiceExcept
 /**
  * Undocumented class
  */
-class Service {
-
+class Service
+{
     protected $client;   // Guzzle Implemetation instance
-    protected $boardToken;  // board token 
+    protected $boardToken;  // board token
     protected $apiKey;       // access key  for 'ingestion' and 'job api service'
     protected $authorizationHeader;
 
@@ -19,37 +19,45 @@ class Service {
     const APPLICATION_URL  = 'https://api.greenhouse.io/v1/applications/';
     const HARVEST_V1_URL   = 'https://harvest.greenhouse.io/v1/';
     const INGESTION_V1_URL = 'https://api.greenhouse.io/v1/partner/';
+    const APPLICATION_V1_URL="https://harvest.greenhouse.io/v1/applications";
 
-    public function getClient() {
+    public function getClient()
+    {
         return $this->client;
     }
 
-    public function setClient($client) {
+    public function setClient($client)
+    {
         $this->client = $client;
     }
 
-    public static function jobBoardBaseUrl($boardToken) {
+    public static function jobBoardBaseUrl($boardToken)
+    {
         return self::API_V1_URL . "boards/{$boardToken}/embed/";
     }
 
-    public static function ingestionBaseUrl() {
+    public static function ingestionBaseUrl()
+    {
         return self::INGESTION_V1_URL;
     }
 
-    public function getIngestionBaseUrl() {
+    public function getIngestionBaseUrl()
+    {
         return self::INGESTION_V1_URL;
     }
 
-    public function getjobBoardBaseUrl() {
-        if(empty($this->boardToken)) {
+    public function getjobBoardBaseUrl()
+    {
+        if (empty($this->boardToken)) {
             throw new GreenhouseServiceException('A client token must be defined to get the base URL.');
         }
         return self::jobBoardBaseUrl($this->boardToken);
     }
 
-    public function getAuthorizationHeader($apiKey = null) {
-        if(empty($apiKey)) {
-            if(empty($this->apiKey)) {
+    public function getAuthorizationHeader($apiKey = null)
+    {
+        if (empty($apiKey)) {
+            if (empty($this->apiKey)) {
                 throw new GreenhouseServiceException('No key provided to encode.');
             }
             $apiKey = $this->apiKey;
@@ -58,8 +66,8 @@ class Service {
         return 'Basic ' . base64_encode($key);
     }
 
-    public function getBearerAuthorizationHeader($apiKey = null) {
+    public function getBearerAuthorizationHeader($apiKey = null)
+    {
         return ['Authorization' => 'Bearer ' . $apiKey];
     }
-
 }

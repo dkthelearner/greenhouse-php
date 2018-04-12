@@ -16,7 +16,7 @@ class IngestionService extends Service
         $this->setClient($client);
         $this->apiKey = $apikey;
         if ($isBasicHeader) {
-            $this->authorizationHeader = $this->getAuthorizationHeader($this->apiKey);
+            $this->authorizationHeader = array_merge($this->getAuthorizationHeader($this->apiKey));
         } else {
             $this->authorizationHeader = $this->getBearerAuthorizationHeader($this->apiKey);
         }
@@ -37,7 +37,9 @@ class IngestionService extends Service
 
     public function getCandidates($ids)
     {
-        $url = $ids ? 'candidates' : 'candidates?' . $this->buildQueryString();
+        $url = 'candidates?' . $this->buildQueryString([
+          'candidate_ids' => $ids
+        ]);
         return $this->client->send('GET', $url, [
                     'headers' => $this->authorizationHeader
         ]);

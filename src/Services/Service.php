@@ -63,7 +63,7 @@ class Service
             $apiKey = $this->apiKey;
         }
         $key = rtrim($apiKey, ':') . ':';
-        return 'Basic ' . base64_encode($key);
+        return ['Authorization' => 'Basic ' . base64_encode($key)];
     }
 
     public function getBearerAuthorizationHeader($apiKey = null)

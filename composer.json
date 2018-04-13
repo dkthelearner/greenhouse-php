@@ -1,6 +1,6 @@
 {
     "name": "krdinesh/greenhouse-php",
-    "description": "Greenhouse PHP",
+    "description": "simple interface to perform basic operation with greenhouse",
     "license": "MIT",
     "authors": [{
         "name": "krdinesh",

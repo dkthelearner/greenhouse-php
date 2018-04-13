@@ -13,7 +13,7 @@ class HarvestServiceTest extends \PHPUnit_Framework_TestCase
                 ->setMethods(array('send'))
                 ->getMock();
         $this->harvestService->setClient($apiStub);
-        $this->expectedAuth   = 'Basic Z3JlZW5ob3VzZTo=';
+        $this->expectedAuth   = ['Authorization' => 'Basic Z3JlZW5ob3VzZTo='];
     }
 
     public function testGetJobPosts()
@@ -87,7 +87,6 @@ class HarvestServiceTest extends \PHPUnit_Framework_TestCase
             'parameters' => array()
         );
         $params   = array();
-
         $this->harvestService->getJobs($params);
         $this->assertEquals($expected, $this->harvestService->getHarvest());
         $this->assertEquals($this->expectedAuth, $this->harvestService->getAuthorizationHeader());

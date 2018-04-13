@@ -18,4 +18,8 @@ class IngestionApiServiceTest extends \PHPUnit_Framework_TestCase
         $this->expectException('Krdinesh\Greenhouse\GreenhousePhp\Clients\Exceptions\GreenhouseResponseException');
         $this->errorService->getJobs();
     }
+
+    public function testGetCandidates()
+    {
+    }
 }

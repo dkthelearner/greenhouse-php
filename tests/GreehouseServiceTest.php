@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 namespace Krdinesh\Greenhouse\GreenhousePhp\Tests;
@@ -36,7 +36,7 @@ class GreehouseServiceTest extends \PHPUnit_Framework_TestCase
     }
     public function testJobService()
     {
-        $jobService=$this->greenhouseService->getJobService();
+        $jobService = $this->greenhouseService->getJobService();
         $this->assertInstanceOf('\Krdinesh\Greenhouse\GreenhousePhp\Clients\GuzzleClient', $jobService->getClient());
         $this->assertInstanceOf('\Krdinesh\Greenhouse\GreenhousePhp\Services\JobService', $jobService);
         $this->assertEquals(
@@ -47,7 +47,7 @@ class GreehouseServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testIngestionService()
     {
-        $ingestionService=$this->greenhouseService->getIngestionService();
+        $ingestionService = $this->greenhouseService->getIngestionService();
         $this->assertInstanceOf('\Krdinesh\Greenhouse\GreenhousePhp\Clients\GuzzleClient', $ingestionService->getClient());
         $this->assertInstanceOf('\Krdinesh\Greenhouse\GreenhousePhp\Services\IngestionService', $ingestionService);
         $this->assertEquals(
@@ -63,7 +63,7 @@ class GreehouseServiceTest extends \PHPUnit_Framework_TestCase
             '\Krdinesh\Greenhouse\GreenhousePhp\Services\HarvestService',
             $service
         );
-        $authHeader = 'Basic ' . base64_encode($this->apiKey . ':');
+        $authHeader = ['Authorization' => 'Basic ' . base64_encode($this->apiKey . ':')];
         $this->assertEquals($authHeader, $service->getAuthorizationHeader());
     }
 }

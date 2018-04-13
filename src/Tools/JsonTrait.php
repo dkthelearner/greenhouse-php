@@ -2,8 +2,8 @@
 
 namespace Krdinesh\Greenhouse\GreenhousePhp\Tools;
 
-trait JsonTrait {
-
+trait JsonTrait
+{
     private function decodeToObjects($json)
     {
         return json_decode($json, false);

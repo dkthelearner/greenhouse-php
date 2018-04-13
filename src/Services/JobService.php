@@ -1,14 +1,14 @@
-<?php 
+<?php
 
 namespace Krdinesh\Greenhouse\GreenhousePhp\Services;
-
 
 use Krdinesh\Greenhouse\GreenhousePhp\Services\Service;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\GuzzleClient;
 
-class JobService extends Service {
-
-    public function __construct($boardToken){
+class JobService extends Service
+{
+    public function __construct($boardToken)
+    {
         $client = new GuzzleClient(['base_uri' => self::jobBoardBaseUrl($boardToken)]);
         $this->setClient($client);
         $this->boardToken = $boardToken;
@@ -19,7 +19,8 @@ class JobService extends Service {
      * @return string   JSON response string from Greenhouse API.
      * @throws GreenhouseResponseException for non-200 responses
      */
-    public function getOffices(){
+    public function getOffices()
+    {
         return $this->client->get('offices');
     }
     
@@ -30,7 +31,8 @@ class JobService extends Service {
      * @return  string  JSON response string from Greenhouse API.
      * @throws  GreenhouseResponseException for non-200 responses
      */
-    public function getOffice($id){
+    public function getOffice($id)
+    {
         return $this->client->get("office?id=$id");
     }
     /**
@@ -39,7 +41,8 @@ class JobService extends Service {
      * @return string   JSON response string from Greenhouse API.
      * @throws GreenhouseResponseException for non-200 responses
      */
-    public function getDepartments(){
+    public function getDepartments()
+    {
         return $this->client->get('departments');
     }
     
@@ -50,7 +53,8 @@ class JobService extends Service {
      * @return  string  JSON response string from Greenhouse API.
      * @throws  GreenhouseResponseException for non-200 responses
      */
-    public function getDepartment($id){
+    public function getDepartment($id)
+    {
         return $this->client->get("department?id=$id");
     }
     
@@ -60,7 +64,8 @@ class JobService extends Service {
      * @return  string  JSON response string from Greenhouse API.
      * @throws  GreenhouseResponseException for non-200 responses
      */
-    public function getBoard(){
+    public function getBoard()
+    {
         return $this->client->get();
     }
     
@@ -72,7 +77,8 @@ class JobService extends Service {
      * @return  string      JSON response string from Greenhouse API.
      * @throws  GreenhouseResponseException for non-200 responses
      */
-    public function getJobs($content=false){
+    public function getJobs($content = false)
+    {
         $queryString = $this->getContentQuery('jobs', $content);
         return $this->client->get($queryString);
     }
@@ -86,7 +92,8 @@ class JobService extends Service {
      * @return  string      JSON response string from Greenhouse API.
      * @throws  GreenhouseResponseException for non-200 responses
      */
-    public function getJob($id, $questions=false){
+    public function getJob($id, $questions = false)
+    {
         $queryString = $this->getQuestionsQuery("job?id=$id", $questions);
         return $this->client->get($queryString);
     }
@@ -98,7 +105,8 @@ class JobService extends Service {
      * @param   boolean $showConent     If true, appends ?content=true to $uriString
      * @return  string
      */
-    public function getContentQuery($uriString, $showContent=false){
+    public function getContentQuery($uriString, $showContent = false)
+    {
         $queryString = $showContent ? '?content=true' : '';
         return $uriString . $queryString;
     }
@@ -106,7 +114,8 @@ class JobService extends Service {
     /**
      * Shortcut method appends questions=true to the query string for a single
      */
-    public function getQuestionsQuery($uriString, $showQuestions=false){
+    public function getQuestionsQuery($uriString, $showQuestions = false)
+    {
         $queryString = $showQuestions ? '&questions=true' : '';
         return $uriString . $queryString;
     }

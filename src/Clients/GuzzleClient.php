@@ -7,22 +7,24 @@ use GuzzleHttp\Exception\RequestException;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\ServiceClientRespository;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\Exceptions\GreenhouseClientException;
 use Krdinesh\Greenhouse\GreenhousePhp\Clients\Exceptions\GreenhouseResponseException;
+
 /**
  * GuzzleClient class implements the Service client Repository
  */
-class GuzzleClient implements ClientInterface {
+class GuzzleClient implements ClientInterface
+{
+    private $client;
 
-   private $client;
-
-  /**
-   * Constructor Function function
-   *
-   * @param Array  $options
-   * @return void
-   */
-   public function __construct($options){
-     $this->client = new client($options);
-   }
+    /**
+     * Constructor Function function
+     *
+     * @param Array  $options
+     * @return void
+     */
+    public function __construct($options)
+    {
+        $this->client = new client($options);
+    }
     /**
      * Get the response from the URL and return the JSON response from the Greenhouse server.
      *
@@ -30,18 +32,18 @@ class GuzzleClient implements ClientInterface {
      * @return string
      * @throws Greenhouse Response Exception
      */
-    public function get($url="") {
-
-      try{
-        $guzzleResponse = $this->client->request('GET',$url);
-      }catch(RequestException $e){
-        throw new GreenhouseResponseException($e->getMessage(), 0, $e);
-      }
-      /**
-       * Just return the response cast as a string.  The rest of the universe need
-       * not be aware of Guzzle's details.
-       */
-      return (string)$guzzleResponse->getBody();
+    public function get($url="")
+    {
+        try {
+            $guzzleResponse = $this->client->request('GET', $url);
+        } catch (RequestException $e) {
+            throw new GreenhouseResponseException($e->getMessage(), 0, $e);
+        }
+        /**
+         * Just return the response cast as a string.  The rest of the universe need
+         * not be aware of Guzzle's details.
+         */
+        return (string)$guzzleResponse->getBody();
     }
 
     /**
@@ -51,37 +53,41 @@ class GuzzleClient implements ClientInterface {
      * @param string $url
      * @throws  GreenhouseServiceResponseException  for non-200 responses
      */
-    public function post(Array $postParams, Array $headers, $url=null){
-      try{
-        $guzzleResponse=$this->client
-          ->post($url,[ 'multipart'=>$postParams,'headers'=>$headers]);
-        }catch(RequestException $e){
-          throw new GreenhouseResponseException($e->getMessage(), 0, $e);
+    public function post(array $postParams, array $headers, $url=null)
+    {
+        try {
+            $guzzleResponse=$this->client
+          ->post($url, [ 'multipart'=>$postParams,'headers'=>$headers]);
+        } catch (RequestException $e) {
+            throw new GreenhouseResponseException($e->getMessage(), 0, $e);
         }
         return (string) $guzzleResponse->getBody();
     }
 
-   /**
-     * Transform the post parameters that client understands.
-     * @params  Array   $postParamters      
-     * @return  mixed   
-     */
-    public function formatPostParameters(Array $postParameters){
-      $guzzleParams=[];
-       foreach($postParameters as $key => $value){
-         if($value instanceof \CURLFile){
-             $guzzleParams[] = [
-                'name' => $key, 
-                'contents' => fopen($value->getFilename(), 'r'), 
+    /**
+      * Transform the post parameters that client understands.
+      * @params  Array   $postParamters
+      * @return  mixed
+      */
+    public function formatPostParameters(array $postParameters)
+    {
+        $guzzleParams=[];
+        foreach ($postParameters as $key => $value) {
+            if ($value instanceof \CURLFile) {
+                $guzzleParams[] = [
+                'name' => $key,
+                'contents' => fopen($value->getFilename(), 'r'),
                 'filename' => $value->getPostFilename()
              ];
-         }elseif(is_array($value)){
-            foreach($value as $k => $v) { $guzzleParams[]=['name' => $key .'[]','contents' => $v];}
-         }else{
-            $guzzleParams[] = ['name' => $key, 'contents' => $value];
-         }
-       }
-      return $guzzleParams;
+            } elseif (is_array($value)) {
+                foreach ($value as $k => $v) {
+                    $guzzleParams[]=['name' => $key .'[]','contents' => $v];
+                }
+            } else {
+                $guzzleParams[] = ['name' => $key, 'contents' => $value];
+            }
+        }
+        return $guzzleParams;
     }
 
     /**
@@ -91,17 +97,18 @@ class GuzzleClient implements ClientInterface {
      * @param [type] $url
      * @return void
      */
-    public function send($method,$url,Array $options){
-      try{
-         $guzzleResponse= $this->client->request($method,$url,$options);
-      }catch(RequestException $e){
-        throw new GreenhouseResponseException($e->getMessage(), 0, $e);
-      }
-      /**
-       * Just return the response cast as a string.  The rest of the universe need
-       * not be aware of Guzzle's details.
-       */
-      return (string)$guzzleResponse->getBody();
+    public function send($method, $url, array $options)
+    {
+        try {
+            $guzzleResponse= $this->client->request($method, $url, $options);
+        } catch (RequestException $e) {
+            throw new GreenhouseResponseException($e->getMessage(), 0, $e);
+        }
+        /**
+         * Just return the response cast as a string.  The rest of the universe need
+         * not be aware of Guzzle's details.
+         */
+        return (string)$guzzleResponse->getBody();
     }
 
     /**
@@ -109,8 +116,8 @@ class GuzzleClient implements ClientInterface {
      *
      * @return $client
      */
-    public function getClient(){
-      return $this->client;
+    public function getClient()
+    {
+        return $this->client;
     }
-
 }

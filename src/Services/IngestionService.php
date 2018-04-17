@@ -10,13 +10,15 @@ class IngestionService extends Service
 {
     use QueryBuilderTrait;
 
-    public function __construct($apikey, $isBasicHeader = false)
+    public function __construct($apikey, $isBasicHeader = null)
     {
         $client       = new GuzzleClient(['base_uri' => self::INGESTION_V1_URL]);
         $this->setClient($client);
         $this->apiKey = $apikey;
         if ($isBasicHeader) {
-            $this->authorizationHeader = array_merge($this->getAuthorizationHeader($this->apiKey));
+            $this->authorizationHeader = array_merge($this->getAuthorizationHeader($this->apiKey), [
+                'On-Behalf-Of' => $isBasicHeader
+            ]);
         } else {
             $this->authorizationHeader = $this->getBearerAuthorizationHeader($this->apiKey);
         }

@@ -30,7 +30,7 @@ class GreenhouseService
         return $jobService;
     }
     
-    public function getIngestionService($isBasicAuth = false)
+    public function getIngestionService($isBasicAuth = null)
     {
         $ingestionService = new IngestionService($this->apiKey, $isBasicAuth);
         $client           = new GuzzleClient([
